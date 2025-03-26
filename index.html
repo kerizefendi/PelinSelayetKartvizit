@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Kartvizit</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+        img {
+            width: 700px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="kartvizit" src="1.png" alt="Kartvizit" onclick="toggleImage()">
+    <button id="shareButton" onclick="sharePage()">Kartviziti Paylaş</button>
+
+    <script>
+        let isImage1 = true;
+
+        function toggleImage() {
+            const img = document.getElementById("kartvizit");
+            img.src = isImage1 ? "2.png" : "1.png";
+            isImage1 = !isImage1;
+        }
+
+        function sharePage() {
+            const url = window.location.href; // Şu anki sayfanın URL'sini alır
+
+            if (navigator.share) {
+                navigator.share({
+                    title: "Kartvizitim",
+                    text: "Kartvizitimi inceleyebilirsin:",
+                    url: url
+                }).catch((error) => console.error("Paylaşım başarısız:", error));
+            } else {
+                alert("Paylaşım API'si desteklenmiyor. Manuel paylaşım için URL: " + url);
+            }
+        }
+    </script>
+
+</body>
+</html>
